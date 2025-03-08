@@ -1,9 +1,8 @@
 
-
 const NotFound = () => {
     return (
         <div>
-            <img src="../assets/Images/not-found.png" alt="not-found" />
+            <img className="w-full" src="../../src/assets/Images/not-found.png" alt="not-found" />
         </div>
     );
 };

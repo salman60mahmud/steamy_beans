@@ -1,19 +1,19 @@
 import { Routes, Route } from 'react-router'
 import './App.css'
 import Header from './Components/Header'
-import HeroSection from './Components/HeroSection'
 import Home from './Components/Home'
 import Products from './Components/Products'
+import NotFound from './Components/NotFound'
 
 function App() {
 
   return (
     <>
       <Header />
-      <HeroSection />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
+        <Route index element={<Home />} />
+        <Route path='/products' element={<Products />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   )

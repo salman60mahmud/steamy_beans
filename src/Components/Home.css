@@ -1,0 +1,10 @@
+.background {
+    padding: 160px;
+    width: auto;
+    height: 100vh;
+    background: url(../assets/Images/hero-section.jpg) center center/cover;
+}
+
+.cta-button:hover {
+    background-color: #2b5e40;
+}
