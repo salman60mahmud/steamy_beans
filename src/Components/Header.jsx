@@ -1,13 +1,28 @@
-import { NavLink } from "react-router";
-const Header = () => {
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { BeansContext } from "../ContextAPI/Context";
 
-  const navItems =
-    <> <li><NavLink className="text-2xl text-rose-950 font-semibold" to='/'>Home</NavLink></li>
-      <li><NavLink className="text-2xl text-rose-950 font-semibold" to='/products'>Products</NavLink></li></>
+const Header = () => {
+  const { newUser, processSignOut } = useContext(BeansContext);
+  const handleSignOut = () => {
+    processSignOut()
+
+  }
+
+
+  const navItems = (
+    <>
+      <li><NavLink className="text-2xl text-rose-950 font-semibold" to='/'>Home</NavLink></li>
+      <li><NavLink className="text-2xl text-rose-950 font-semibold" to='/products'>Products</NavLink></li>
+      {newUser && (
+        <li><NavLink className="text-2xl text-rose-950 font-semibold" to='/dashboard'>Dashboard</NavLink></li>
+      )}
+    </>
+  );
 
   return (
     <div>
-      <div className="navbar bg-amber-500 shadow-sm"> 
+      <div className="navbar bg-indigo-200 shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -15,7 +30,7 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               {navItems}
             </ul>
           </div>
@@ -27,7 +42,7 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <NavLink to='/Login' className="btn text-2xl pb-2 hover:bg-amber-700 hover:text-amber-50">Login</NavLink>
+          {newUser ? <NavLink onClick={handleSignOut} className="btn text-2xl pb-2 mr-10 border-2 border-amber-800 hover:bg-amber-700 hover:text-amber-50">SignOut</NavLink> : <NavLink to='/Login' className="btn text-2xl pb-2 mr-10 border-2 border-amber-800 hover:bg-amber-700 hover:text-amber-50">Login</NavLink>}
         </div>
       </div>
     </div>

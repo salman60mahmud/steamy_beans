@@ -1,0 +1,9 @@
+.text-size {
+    font-size: 14px;
+}
+.login-sign-background{
+    background: url("../assets/Images/login-background.jpg") center center/cover;
+    padding: 160px;
+    width: auto;
+    height: 100vh;
+}

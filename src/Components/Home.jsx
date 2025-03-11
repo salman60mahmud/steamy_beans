@@ -4,9 +4,8 @@ const Home = () => {
     return (
         <div className='background'>
             <div className='mt-40'>
-                <h1 className='text-3xl text-orange-400 font-bold text_shadow'>Welcome to Our Website</h1>
-                <h2 className='text-3xl text-lime-800 font-medium text_shadow2 mt-5'>Your journey to success starts here.</h2>
-                <a class="btn btn-secondary font-semibold text-3xl mt-8">Be Our Guest</a>
+                <h2 className='text-4xl text-orange-400 font-bold text_shadow mt-5'>Enjoy The Taste of <br /> <span className='ml-20 text-5xl'>Steamy Beans</span></h2>
+                <a class="btn btn-secondary cta-button font-semibold text-4xl mt-8 ml-12 p-6">Be Our Guest</a>
             </div>
         </div>
     );
