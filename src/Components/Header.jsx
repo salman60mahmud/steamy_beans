@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { BeansContext } from "../ContextAPI/Context";
+import { FaBars } from "react-icons/fa6";
 
 const Header = () => {
   const { newUser, processSignOut } = useContext(BeansContext);
@@ -8,7 +9,6 @@ const Header = () => {
     processSignOut()
 
   }
-
 
   const navItems = (
     <>
@@ -33,8 +33,8 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               {navItems}
             </ul>
-          </div>
-          <NavLink to='/' className="ml-10 text-3xl font-semibold text-blue-900">Steamy Beans</NavLink>
+          </div> 
+          <NavLink to='/' className="ml-10 text-3xl font-bold text-orange-700">Steamy Beans</NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -43,6 +43,9 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           {newUser ? <NavLink onClick={handleSignOut} className="btn text-2xl pb-2 mr-10 border-2 border-amber-800 hover:bg-amber-700 hover:text-amber-50">SignOut</NavLink> : <NavLink to='/Login' className="btn text-2xl pb-2 mr-10 border-2 border-amber-800 hover:bg-amber-700 hover:text-amber-50">Login</NavLink>}
+          <label htmlFor="my-drawer-2" className=" text-3xl mr-6 text-neutral-800 drawer-button lg:hidden">
+          <FaBars />
+                    </label>
         </div>
       </div>
     </div>

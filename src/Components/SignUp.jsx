@@ -8,7 +8,7 @@ import './Login.css';
 
 const SignUp = () => {
     const navigate = useNavigate();
-    const { handleRegisterWithEmail } = useContext(BeansContext);
+    const { handleRegisterWithEmail, url } = useContext(BeansContext);
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -25,12 +25,12 @@ const SignUp = () => {
         const user = { name, email, role };
 
         handleRegisterWithEmail(email, password)
-            .then((userCredential) => {
+            .then(() => {
                 updateProfile(auth.currentUser, {
                     displayName: name
                 })
                     .then(() => {
-                        fetch('http://localhost:5000/user', {
+                        fetch(`${url}/user`, {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json',

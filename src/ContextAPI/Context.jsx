@@ -8,6 +8,7 @@ export const BeansContext = createContext(null);
 const Context = ({ children }) => {
     const navigate = useNavigate();
     const [newUser, setUser] = useState(null);
+    const url = 'http://localhost:5000';
 
     useEffect(() => {
         const observer = onAuthStateChanged(auth, (user) => {
@@ -39,25 +40,26 @@ const Context = ({ children }) => {
         });
     }
 
-    const processLogin =(email, password) => {
+    const processLogin = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in 
-          const user = userCredential.user;
-          setUser(user);
-          navigate('/dashboard')
-          toast.success("Login Successful!")
-        })
-        .catch((error) => {
-          toast.error(error.message)
-        });
-      
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                setUser(user);
+                navigate('/dashboard')
+                toast.success("Login Successful!")
+            })
+            .catch((error) => {
+                toast.error(error.message)
+            });
+
     }
     const data = {
         handleRegisterWithEmail,
         newUser,
         processSignOut,
-        processLogin 
+        processLogin, 
+        url
     }
     return (
         <BeansContext.Provider value={data}>
