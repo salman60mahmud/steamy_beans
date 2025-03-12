@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BeansContext } from '../ContextAPI/Context';
+import { toast } from 'react-toastify';
 
 const ManageUser = () => {
     const { url } = useContext(BeansContext);
@@ -9,8 +10,42 @@ const ManageUser = () => {
         fetch(`${url}/alluser`)
             .then(response => response.json())
             .then(data => setUsers(data))
-            .catch(error => console.error('Error fetching users:', error));
+            .catch(error => {
+                console.error('Error fetching users:', error);
+                toast.error('Failed to fetch users');
+            });
     }, [url]);
+
+    const handleUpdate = (email) => {
+        fetch(`${url}/user/make-moderator/${email}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to create moderator');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.modifiedCount > 0) {
+                fetch(`${url}/alluser`)
+                    .then(response => response.json())
+                    .then(data => setUsers(data))
+                    .catch(error => {
+                        console.error('Error fetching users:', error);
+                        toast.error('Failed to fetch users');
+                    });
+                toast.success('Promoted Successfully');
+            }
+        })
+        .catch(error => {
+            console.error('Error promoting user:', error);
+            toast.error('Failed to promote user');
+        });
+    };
 
     return (
         <div>
@@ -27,9 +62,8 @@ const ManageUser = () => {
                         </tr>
                     </thead>
                     <tbody>
-
                         {users?.map(user => (
-
+                            user.role === 'customer' && (
                                 <tr key={user._id}>
                                     <td>
                                         <div className="flex items-center gap-3">
@@ -47,15 +81,15 @@ const ManageUser = () => {
                                         </div>
                                     </td>
                                     <td>
- {user?.email}
+                                        {user?.email}
                                     </td>
                                     <td>{user?.role}</td>
                                     <th>
-                                        <button className="btn">Promote</button>
+                                        <button onClick={() => handleUpdate(user.email)} className="btn">Promote</button>
                                     </th>
                                 </tr>
+                            )
                         ))}
-                        {/* row 1 */}
                     </tbody>
                 </table>
             </div>
@@ -63,4 +97,4 @@ const ManageUser = () => {
     );
 };
 
-export default ManageUser; 
+export default ManageUser;
