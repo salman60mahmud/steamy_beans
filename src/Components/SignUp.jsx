@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 import auth from "./firebaseconfig";
 import './Login.css';
+import PasswordInput from "./PasswordInput";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -73,10 +74,8 @@ const SignUp = () => {
                     <input type="text" className="input" placeholder="Name" name='name' aria-label="Enter your full name" required />
                     <label className="fieldset-label text-xl text-black">Email</label>
                     <input type="email" className="input" placeholder="Email" name='email' aria-label="Enter your email address" required />
-                    <label className="fieldset-label text-xl text-black">Password</label>
-                    <input type="password" className="input" placeholder="Password" name='password' aria-describedby="password-help" required
-                    />
-                    <p id="password-help" className="text-sm text-gray-500" />
+
+                    <PasswordInput/>
                     Password must be at least 8 characters long.
                     <button className="btn btn-neutral mt-4">Submit</button>
                 </form>

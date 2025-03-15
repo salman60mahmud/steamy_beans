@@ -23,28 +23,28 @@ const ManageUser = () => {
                 'Content-Type': 'application/json',
             },
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to create moderator');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.modifiedCount > 0) {
-                fetch(`${url}/alluser`)
-                    .then(response => response.json())
-                    .then(data => setUsers(data))
-                    .catch(error => {
-                        console.error('Error fetching users:', error);
-                        toast.error('Failed to fetch users');
-                    });
-                toast.success('Promoted Successfully');
-            }
-        })
-        .catch(error => {
-            console.error('Error promoting user:', error);
-            toast.error('Failed to promote user');
-        });
+            .then(response => {
+                if (response.status === 404) {
+                    toast.error('Failed to create moderator');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    fetch(`${url}/alluser`)
+                        .then(response => response.json())
+                        .then(data => setUsers(data))
+                        .catch(error => {
+                            console.error('Error fetching users:', error);
+                            toast.error('Failed to fetch users');
+                        });
+                    toast.success('Promoted Successfully');
+                }
+            })
+            .catch(error => {
+                console.error('Error promoting user:', error);
+                toast.error('Failed to promote user');
+            });
     };
 
     return (

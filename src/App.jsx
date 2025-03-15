@@ -31,7 +31,8 @@ function App() {
         } />
         <Route path='/dashboard/manageuser' element={
           <ProtectedRoute>
-            <ManageUser />
+            <ManageUser 
+            />
           </ProtectedRoute>
         } />
 

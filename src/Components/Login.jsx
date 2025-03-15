@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import './Login.css'
 import { useContext } from "react";
 import { BeansContext } from "../ContextAPI/Context";
+import PasswordInput from "./PasswordInput";
 const Login = () => {
     const { processLogin } = useContext(BeansContext);
 
@@ -21,9 +22,7 @@ const Login = () => {
                     <label className="fieldset-label text-xl text-black">Email</label>
                     <input type="email" className="input" placeholder="Email" name="email" aria-label="Enter your email address" required />
 
-                    <label className="fieldset-label text-xl text-black">Password</label>
-                    <input type="password" className="input" placeholder="Password" name="password" aria-describedby="password-help" required />
-                    <p id="password-help" className="text-sm text-gray-500" />
+                    <PasswordInput />
                     Password must be at least 8 characters long.
                     <button className="btn btn-neutral mt-4">Login</button>
                 </form>
